@@ -1,6 +1,6 @@
+import app from "./app";
 import { config } from "dotenv";
 import { connectDB, envConfig } from "./lib/config";
-import app from "./app";
 config(envConfig());
 
 connectDB()
@@ -13,3 +13,8 @@ connectDB()
   .catch(err => {
     console.log("Error in connecting to MongoDB: ", err);
   });
+
+process.on("uncaughtException", err => {
+  console.log("Uncaught Exception: ", err);
+  process.exit(1);
+});
